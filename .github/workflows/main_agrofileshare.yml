@@ -32,6 +32,10 @@ jobs:
         
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
+      - name: Collect static files
+        run: |
+          python manage.py collectstatic --noinput
+
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
 
@@ -65,9 +69,10 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_E1D7D80A7CB34BB1AAA767B66CC5E8D6 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_4070153A7890498C89D69744EB7AB591 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_9110258E041B4A6798B1FCD74FDBE774 }}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+          client-secret: ${{ secrets.AZURE_CLIENT_SECRET }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
