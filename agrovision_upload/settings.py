@@ -56,7 +56,7 @@ account_name = client.get_secret("AZUREACCOUNTNAME").value
 account_key = client.get_secret("AZUREACCOUNTKEY").value
 container_name = client.get_secret("AZURECONTAINER").value
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['agrofileshare-dac7b3e6ghcfeae4.westeurope-01.azurewebsites.net']
 
 
 # Application definition
